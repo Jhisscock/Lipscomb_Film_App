@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppConfig {
-  static const appName = "Heart String";
+  static const appName = "Lipscomb Film Search";
   static const appTagline = "Find your perfect match";
 }
 

@@ -29,14 +29,6 @@ class _LoginPageState extends State<LoginPage> {
             fontSize: 45.0,
           ),
         ),
-        Text(
-          "We missed you!",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 18.0,
-            fontWeight: FontWeight.w500,
-          ),
-        )
       ],
     );
 

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "133800157404",
+    "firebase_url": "https://film-app-87471.firebaseio.com",
+    "project_id": "film-app-87471",
+    "storage_bucket": "film-app-87471.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:133800157404:android:dd44eeabeac94747e11419",
+        "android_client_info": {
+          "package_name": "com.lipscomb.film_search"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "133800157404-spc25gc2reeqkijqtqjpfa2ujn18job1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaRjdEgqbI8t35Gn1WgZQfQ2POQwkiNeo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "133800157404-spc25gc2reeqkijqtqjpfa2ujn18job1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
