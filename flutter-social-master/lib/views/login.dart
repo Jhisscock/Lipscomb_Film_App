@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_social/_routing/routes.dart';
 import 'package:flutter_social/utils/colors.dart';
+import 'package:flutter_social/services/authentication.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:async';
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -14,6 +17,8 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  TextEditingController emailController = new TextEditingController();
+  TextEditingController passwordController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     // Change Status Bar Color
@@ -35,6 +40,7 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     final emailField = TextFormField(
+      controller: emailController,
       decoration: InputDecoration(
         labelText: 'Email Address',
         labelStyle: TextStyle(color: Colors.white),
@@ -55,6 +61,7 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     final passwordField = TextFormField(
+      controller: passwordController,
       decoration: InputDecoration(
         labelText: 'Password',
         labelStyle: TextStyle(color: Colors.white),
@@ -85,6 +92,15 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
 
+    void login()async{
+      FirebaseUser user;
+      try {
+        user = (await _auth.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text)).user;
+      } catch (e) {
+        print(e.toString());
+      }
+    }
+
     final loginBtn = Container(
       margin: EdgeInsets.only(top: 40.0),
       height: 60.0,
@@ -97,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
       child: RaisedButton(
         elevation: 5.0,
         onPressed: () {
-          _handleSignIn();
+          login();
           Navigator.pushNamed(context, homeViewRoute);
         },
         color: Colors.white,
@@ -179,17 +195,5 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
-  }
-  Future<FirebaseUser> _handleSignIn() async {
-    final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
-    final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-
-    final AuthCredential credential = GoogleAuthProvider.getCredential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-
-    final FirebaseUser user = (await _auth.signInWithCredential(credential)).user;
-    return user;
   }
 }
