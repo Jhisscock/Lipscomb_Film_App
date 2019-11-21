@@ -4,7 +4,6 @@ import 'package:flutter_social/utils/colors.dart';
 import 'package:flutter_social/services/authentication.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:flutter/services.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:async';
 
@@ -15,7 +14,6 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
@@ -39,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
       ],
     );
 
-    final emailField = TextFormField(
+ /*   final emailField = TextFormField(
       controller: emailController,
       decoration: InputDecoration(
         labelText: 'Email Address',
@@ -91,14 +89,40 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  */
 
-    void login()async{
-      FirebaseUser user;
-      try {
-        user = (await _auth.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text)).user;
-      } catch (e) {
-        print(e.toString());
-      }
+    final loginForm = Padding(
+      padding: EdgeInsets.only(top: 30.0),
+      child: Form(
+        key: _formKey,
+        child: Column(
+          children: <Widget>[
+            TextFormField(
+              controller: emailController,
+              decoration: InputDecoration(
+                  labelText: 'Enter your email'
+              ),
+            ),
+            TextFormField(
+              controller: passwordController,
+              decoration: InputDecoration(
+                  labelText: 'Enter your password'
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+
+    Future<String> signIn(String email, String password) async {
+      AuthResult result = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      FirebaseUser user = result.user;
+      return user.uid;
+    }
+    someMethod() async {
+      FirebaseUser user = await FirebaseAuth.instance.currentUser();
+      debugPrint(user.uid);
     }
 
     final loginBtn = Container(
@@ -113,8 +137,9 @@ class _LoginPageState extends State<LoginPage> {
       child: RaisedButton(
         elevation: 5.0,
         onPressed: () {
-          login();
-          Navigator.pushNamed(context, homeViewRoute);
+            signIn(emailController.text, passwordController.text);
+            someMethod();
+            Navigator.pushNamed(context, homeViewRoute);
         },
         color: Colors.white,
         shape: new RoundedRectangleBorder(

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_social/_routing/routes.dart';
 import 'package:flutter_social/utils/colors.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:async';
 
@@ -67,7 +66,7 @@ class _RegisterPageState extends State<RegisterPage> {
             TextFormField(
               controller: emailController,
               decoration: InputDecoration(
-              labelText: 'Enter your email'
+                  labelText: 'Enter your email'
               ),
             ),
             TextFormField(
