@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
 
-const primaryColor = const Color(0xFFfbab66);
+const primaryColor = const Color(0xFF9C27B0);
 const primaryLight = const Color(0xFFFF9F59);
 const primaryDark = const Color(0xFFFF9F59);
 
@@ -9,8 +9,8 @@ const secondaryColor = const Color(0xFFFF9F59);
 const secondaryLight = const Color(0xFFFF9F59);
 const secondaryDark = const Color(0xFFFF9F59);
 
-const Color gradientStart = const Color(0xFFfbab66);
-const Color gradientEnd = const Color(0xFFf7418c);
+const Color gradientStart = const Color(0xFF9C27B0);
+const Color gradientEnd = const Color(0xFFFDD835);
 
 const primaryGradient = const LinearGradient(
   colors: const [gradientStart, gradientEnd],

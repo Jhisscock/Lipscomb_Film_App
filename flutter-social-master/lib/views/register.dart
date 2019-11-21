@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_social/_routing/routes.dart';
 import 'package:flutter_social/utils/colors.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:async';
+
+final FirebaseAuth _auth = FirebaseAuth.instance;
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -11,6 +15,8 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
   int _genderRadioBtnVal = -1;
+  TextEditingController emailController = new TextEditingController();
+  TextEditingController passwordController = new TextEditingController();
 
   void _handleGenderChange(int value) {
     setState(() {
@@ -57,14 +63,18 @@ class _RegisterPageState extends State<RegisterPage> {
         key: _formKey,
         child: Column(
           children: <Widget>[
-            _buildFormField('Name', LineIcons.user),
-            formFieldSpacing,
-            _buildFormField('Email Address', LineIcons.envelope),
-            formFieldSpacing,
-            _buildFormField('Phone Number', LineIcons.mobile_phone),
-            formFieldSpacing,
-            _buildFormField('Password', LineIcons.lock),
-            formFieldSpacing,
+            TextFormField(
+              controller: emailController,
+              decoration: InputDecoration(
+                  labelText: 'Enter your email'
+              ),
+            ),
+            TextFormField(
+              controller: passwordController,
+              decoration: InputDecoration(
+                  labelText: 'Enter your password'
+              ),
+            ),
           ],
         ),
       ),
@@ -112,7 +122,10 @@ class _RegisterPageState extends State<RegisterPage> {
           elevation: 10.0,
           shadowColor: Colors.white70,
           child: MaterialButton(
-            onPressed: () => Navigator.of(context).pushNamed(homeViewRoute),
+            onPressed: () {
+              signUp();
+              Navigator.of(context).pushNamed(homeViewRoute);
+            },
             child: Text(
               'CREATE ACCOUNT',
               style: TextStyle(
@@ -150,6 +163,15 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
       ),
     );
+  }
+  void signUp()async{
+    FirebaseUser user;
+    try {
+      user = (await _auth.createUserWithEmailAndPassword(
+          email: emailController.text, password: passwordController.text)).user;
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
   Widget _buildFormField(String label, IconData icon) {

@@ -33,14 +33,6 @@ class LandingPage extends StatelessWidget {
             fontSize: 30.0,
           ),
         ),
-        Text(
-          AppConfig.appTagline,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 18.0,
-            fontWeight: FontWeight.w500
-          ),
-        )
       ],
     );
 
@@ -117,22 +109,6 @@ class LandingPage extends StatelessWidget {
                 children: <Widget>[logo, appName, buttons],
               ),
             ),
-            Positioned(
-              bottom: 0,
-              child: Padding(
-                padding: EdgeInsets.only(left: 10.0),
-                child: Container(
-                  height: 300.0,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AvailableImages.homePage,
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                ),
-              ),
-            )
           ],
         ),
       ),

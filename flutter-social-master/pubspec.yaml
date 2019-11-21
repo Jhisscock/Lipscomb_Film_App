@@ -17,6 +17,7 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  firebase_auth: ^0.14.0+9
   flutter:
     sdk: flutter
   line_icons: ^0.2.0
