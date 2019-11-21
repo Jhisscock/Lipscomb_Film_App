@@ -120,10 +120,6 @@ class _LoginPageState extends State<LoginPage> {
       FirebaseUser user = result.user;
       return user.uid;
     }
-    someMethod() async {
-      FirebaseUser user = await FirebaseAuth.instance.currentUser();
-      debugPrint(user.uid);
-    }
 
     final loginBtn = Container(
       margin: EdgeInsets.only(top: 40.0),
@@ -138,7 +134,6 @@ class _LoginPageState extends State<LoginPage> {
         elevation: 5.0,
         onPressed: () {
             signIn(emailController.text, passwordController.text);
-            someMethod();
             Navigator.pushNamed(context, homeViewRoute);
         },
         color: Colors.white,
