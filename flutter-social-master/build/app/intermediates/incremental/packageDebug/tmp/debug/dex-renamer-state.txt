@@ -1,4 +1,0 @@
-#Thu Nov 21 15:28:43 CST 2019
-base.0=E\:\\GitHub\\Lipscomb_Film_App\\flutter-social-master\\build\\app\\intermediates\\transforms\\dexMerger\\debug\\0
-path.0=classes.dex
-renamed.0=classes.dex

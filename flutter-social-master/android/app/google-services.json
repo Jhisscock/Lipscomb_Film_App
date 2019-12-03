@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "150748459439",
+    "firebase_url": "https://lipscomb-film-app-626df.firebaseio.com",
+    "project_id": "lipscomb-film-app-626df",
+    "storage_bucket": "lipscomb-film-app-626df.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:150748459439:android:32028e488e37796f83ff5a",
+        "android_client_info": {
+          "package_name": "com.lipscomb.film_search"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "150748459439-p6ghbq14fghrdn93cjsunmk7elr5pbme.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsKqTC7bpaxfXnOsET3xxv5VqIkzMYe6M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "150748459439-p6ghbq14fghrdn93cjsunmk7elr5pbme.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
