@@ -4,6 +4,7 @@ import 'package:flutter_social/views/tabs/chats.dart';
 import 'package:flutter_social/views/tabs/feeds.dart';
 import 'package:flutter_social/views/tabs/notifications.dart';
 import 'package:flutter_social/views/tabs/profile.dart';
+import 'package:flutter_social/views/tabs/search.dart';
 import 'package:line_icons/line_icons.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,6 +16,7 @@ class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
   final List<Widget> _pages = [
     FeedsPage(),
+    SearchPage(),
     ChatsPage(),
     NotificationsPage(),
     ProfilePage(),
@@ -40,6 +42,13 @@ class _HomePageState extends State<HomePage> {
           icon: Icon(Icons.rss_feed),
           title: Text(
             'Feed',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.search),
+          title: Text(
+            'Search',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
