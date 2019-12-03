@@ -18,6 +18,10 @@ environment:
 
 dependencies:
   firebase_auth: ^0.14.0+9
+  image_picker: ^0.6.2+1
+  firebase_storage: ^3.0.8
+  cloud_firestore: ^0.12.10+2
+  firebase_database: ^3.1.0
   flutter:
     sdk: flutter
   line_icons: ^0.2.0

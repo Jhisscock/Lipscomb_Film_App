@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
     FeedsPage(),
     ChatsPage(),
     NotificationsPage(),
-    ProfilePage()
+    ProfilePage(),
   ];
 
   void onTabTapped(int index) {

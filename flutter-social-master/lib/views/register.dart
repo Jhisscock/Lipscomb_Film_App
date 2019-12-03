@@ -4,6 +4,10 @@ import 'package:flutter_social/utils/colors.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:async';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+import 'package:path/path.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -17,12 +21,8 @@ class _RegisterPageState extends State<RegisterPage> {
   int _genderRadioBtnVal = -1;
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
-
-  void _handleGenderChange(int value) {
-    setState(() {
-      _genderRadioBtnVal = value;
-    });
-  }
+  String _uploadedFileURL;
+  File _image;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +42,24 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
     );
 
+    Future getImage() async {
+      var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+
+      setState(() {
+        _image = image;
+        print('Image Path $_image');
+      });
+    }
+    Future uploadPic(BuildContext context) async{
+      String fileName = basename(_image.path);
+      StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child(fileName);
+      StorageUploadTask uploadTask = firebaseStorageRef.putFile(_image);
+      StorageTaskSnapshot taskSnapshot=await uploadTask.onComplete;
+      setState(() {
+        print("Profile Picture uploaded");
+        Scaffold.of(context).showSnackBar(SnackBar(content: Text('Profile Picture Uploaded')));
+      });
+    }
     final pageTitle = Container(
       child: Text(
         "Tell us about you.",
@@ -80,29 +98,36 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
     );
 
-    final gender = Padding(
-      padding: EdgeInsets.only(top: 0.0),
-      child: Row(
-        children: <Widget>[
-          Radio(
-            value: 0,
-            groupValue: _genderRadioBtnVal,
-            onChanged: _handleGenderChange,
+    final uploadPhoto = Padding(
+      padding: EdgeInsets.only(top: 20.0),
+      child: Container(
+        margin: EdgeInsets.only(top: 10.0, bottom: 20.0),
+        height: 60.0,
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(7.0),
+          border: Border.all(color: Colors.white),
+        ),
+        child: Material(
+          borderRadius: BorderRadius.circular(7.0),
+          color: primaryColor,
+          elevation: 10.0,
+          shadowColor: Colors.white70,
+          child: MaterialButton(
+            onPressed: () {
+              getImage();
+              uploadPic(context);
+            },
+            child: Text(
+              'Upload a Photo',
+              style: TextStyle(
+                fontWeight: FontWeight.w800,
+                fontSize: 20.0,
+                color: Colors.white,
+              ),
+            ),
           ),
-          Text("Male"),
-          Radio(
-            value: 1,
-            groupValue: _genderRadioBtnVal,
-            onChanged: _handleGenderChange,
-          ),
-          Text("Female"),
-          Radio(
-            value: 2,
-            groupValue: _genderRadioBtnVal,
-            onChanged: _handleGenderChange,
-          ),
-          Text("Other"),
-        ],
+        ),
       ),
     );
 
@@ -153,7 +178,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   children: <Widget>[
                     pageTitle,
                     registerForm,
-                    gender,
+                    uploadPhoto,
                     submitBtn
                   ],
                 ),
